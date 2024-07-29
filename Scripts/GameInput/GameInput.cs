@@ -8,6 +8,7 @@ public class GameInput : MonoBehaviour {
     public static GameInput Instance { get; private set; }
 
     public event EventHandler OnAttackAction;
+    public event EventHandler OnAttackActionCancel;
 
     public PlayerInputActions playerInputActions;
 
@@ -26,6 +27,11 @@ public class GameInput : MonoBehaviour {
 
     private void Start() {
         playerInputActions.Player.Attack.performed += Attack_performed;
+        playerInputActions.Player.Attack.canceled += Attack_canceled;
+    }
+
+    private void Attack_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnAttackActionCancel?.Invoke(this, EventArgs.Empty);
     }
 
     private void Attack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
