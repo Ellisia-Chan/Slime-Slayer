@@ -9,7 +9,7 @@ public class SwordAnimator : MonoBehaviour {
 
     private const string ATTACK_TRIGGER = "Attack";
 
-    [SerializeField] private float swordCD = 0.5f;
+    [SerializeField] private float swordCD = 0.3f;
 
     private Animator swordAnimator;
     private Transform swordCollider;
@@ -37,11 +37,11 @@ public class SwordAnimator : MonoBehaviour {
     }
 
     private void GameInput_OnAttackAction(object sender, System.EventArgs e) {
-        IsAttacking();
+        attackButtondDown = true;
     }
 
     private void GameInput_OnAttackActionCancel(object sender, EventArgs e) {
-        IsDoneAttacking();
+        attackButtondDown = false;
     }
 
     private void Update() {
@@ -49,25 +49,19 @@ public class SwordAnimator : MonoBehaviour {
         Attack();
     }
 
-    private void IsAttacking() {
-        attackButtondDown = true;
-    }
-
-    private void IsDoneAttacking() {
-        attackButtondDown = false;
-    }
-
     private void Attack() {
         if (attackButtondDown && !isAttacking) {
             isAttacking = true;
             swordAnimator.SetTrigger(ATTACK_TRIGGER);
             SwordSlashAnimator.Instance.SpawnSwordSlash();
+            Sword.Instance.EnableSwordCollider();
             StartCoroutine(AttackCDRoutine());
         }
     }
 
     private IEnumerator AttackCDRoutine() {
-        yield return new WaitForSeconds(swordCD);
+        yield return new WaitForSeconds(swordCD);   
+        Sword.Instance.DisableSwordCollider();
         isAttacking = false;
     }
 
