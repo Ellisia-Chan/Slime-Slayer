@@ -22,9 +22,9 @@ public class Sword : MonoBehaviour {
     }
 
     private void GameInput_OnAttackAction(object sender, System.EventArgs e) {
-        if (SwordAnimator.Instance.IsAttackButtonDown() && !SwordAnimator.Instance.IsAttackingPerform()) {
+        /*if (SwordAnimator.Instance.IsAttackButtonDown() && !SwordAnimator.Instance.IsAttackingPerform()) {
             EnableSwordCollider();
-        }
+        }*/
     }
 
     public void EnableSwordCollider() {
