@@ -6,9 +6,13 @@ public class EnemyHealth : MonoBehaviour {
 
     [SerializeField] private int startingHealth = 3;
     [SerializeField] private GameObject deathVFXPrefab;
+    [SerializeField] private string deathVFXSortingLayerName = "Default";
+    [SerializeField] private int deathVFXSortingLayerOrder = 0;
 
     private EnemyKnockBack enemyKnockBack;
     private EnemyHitFlash enemyHitFlash;
+    private ParticleSystemRenderer ps;
+    private GameObject deathVFX;
     private int currentHealth;
     private float knockedBackThrust = 15f;
 
@@ -35,8 +39,17 @@ public class EnemyHealth : MonoBehaviour {
 
     public void DetectDeath() {
         if (currentHealth <= 0) {
-            Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
+            deathVFX = Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
+            SetSortingLayer(deathVFX);
             Destroy(gameObject);
+        }
+    }
+
+    private void SetSortingLayer(GameObject obj) {
+        ps = obj.GetComponent<ParticleSystemRenderer>();
+        if (ps != null) {
+            ps.sortingLayerName = deathVFXSortingLayerName;
+            ps.sortingOrder = deathVFXSortingLayerOrder;
         }
     }
 }
