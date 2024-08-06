@@ -24,8 +24,15 @@ public class PlayerController : MonoBehaviour {
     private float defaultMoveSpeed = 4f;
 
     private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            Instance = this;
+            return;
+        }
+
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
@@ -50,7 +57,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void HandleMovement() {
-        rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
+        if (rb != null) {
+            rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
+        } else {
+            Debug.LogWarning("RigidBody2D not Found");
+        }
     }
 
     private void PlayerMovementDirection() {

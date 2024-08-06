@@ -14,9 +14,16 @@ public class PlayerAnimator : MonoBehaviour {
     private Vector2 movementDir;
 
     private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(Instance);
+            Instance = this;
+            return;
+        }
+
         Instance = this;
         playerAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update() {

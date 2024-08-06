@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour {
 
+    public static Parallax Instance { get; private set; }
+
     [SerializeField] private float parallaxOffset = -0.25f;
 
     private Camera cam;
@@ -11,14 +13,20 @@ public class Parallax : MonoBehaviour {
     private Vector2 travelPos => (Vector2)cam.transform.position - startPos;
 
     private void Awake() {
+        Instance = this;
         cam = Camera.main;
-    }
-
-    private void Start() {
         startPos = transform.position;
     }
 
     private void FixedUpdate() {
+        MoveParallax();
+    }
+
+    public void ResetCameraStartPos() {
+        transform.position = startPos - travelPos * parallaxOffset;
+    }
+
+    private void MoveParallax() {
         transform.position = startPos + travelPos * parallaxOffset;
     }
 }

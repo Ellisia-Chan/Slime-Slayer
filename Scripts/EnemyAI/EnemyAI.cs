@@ -20,6 +20,14 @@ public class EnemyAI : MonoBehaviour {
         state = State.Roaming;
     }
 
+    private void OnDisable() {
+        StopAllCoroutines();
+    }
+
+    private void OnEnable() {
+        StartCoroutine(RoamingRoutine());
+    }
+
     private void Start() {
         StartCoroutine(RoamingRoutine());
     }
