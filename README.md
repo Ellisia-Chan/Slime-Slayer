@@ -2,4 +2,4 @@
 
 A slime slaying game
 
-⚠️ Game is Under Development ⚠️
+⚠️ Under Development ⚠️
