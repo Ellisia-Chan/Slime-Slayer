@@ -32,13 +32,19 @@ public class TransparentDetection : MonoBehaviour {
                 if (spriteFadeCoroutine != null) {
                     StopCoroutine(spriteFadeCoroutine);
                 }
-                spriteFadeCoroutine = StartCoroutine(SpriteFadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, transparencyAmount));
+
+                if (gameObject.activeInHierarchy) {
+                    spriteFadeCoroutine = StartCoroutine(SpriteFadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, transparencyAmount));
+                }
 
             } else if (tilemap != null) {
                 if (tilemapFadeCoroutine != null) {
                     StopCoroutine(tilemapFadeCoroutine);
                 }
-                tilemapFadeCoroutine = StartCoroutine(TilemapFadeRoutine(tilemap, fadeTime, tilemap.color.a, transparencyAmount));
+
+                if (gameObject.activeInHierarchy) {
+                    tilemapFadeCoroutine = StartCoroutine(TilemapFadeRoutine(tilemap, fadeTime, tilemap.color.a, transparencyAmount));
+                }
             }
         }
     }
@@ -49,13 +55,19 @@ public class TransparentDetection : MonoBehaviour {
                 if (spriteFadeCoroutine != null) {
                     StopCoroutine(spriteFadeCoroutine);
                 }
-                spriteFadeCoroutine = StartCoroutine(SpriteFadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, fullTranscparencyAmount));
+
+                if (gameObject.activeInHierarchy) {
+                    spriteFadeCoroutine = StartCoroutine(SpriteFadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, fullTranscparencyAmount));
+                }
 
             } else if (tilemap != null) {
                 if (tilemapFadeCoroutine != null) {
                     StopCoroutine(tilemapFadeCoroutine);
                 }
-                tilemapFadeCoroutine = StartCoroutine(TilemapFadeRoutine(tilemap, fadeTime, tilemap.color.a, fullTranscparencyAmount));
+
+                if (gameObject.activeInHierarchy) {
+                    tilemapFadeCoroutine = StartCoroutine(TilemapFadeRoutine(tilemap, fadeTime, tilemap.color.a, fullTranscparencyAmount));
+                }
             }
         }
     }
