@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour {
 
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {

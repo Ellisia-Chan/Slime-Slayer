@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyKnockBack : MonoBehaviour {
 
-    [SerializeField] private float knockBackTime = 0.1f;
+    [SerializeField] private float knockBackTime = 0.3f;
 
     private Rigidbody2D rb;
     private bool isKnockedBack;

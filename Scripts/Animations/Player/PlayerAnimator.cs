@@ -23,7 +23,6 @@ public class PlayerAnimator : MonoBehaviour {
         Instance = this;
         playerAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Update() {
