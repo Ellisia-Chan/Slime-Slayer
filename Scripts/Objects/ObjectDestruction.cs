@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectDistruction : MonoBehaviour
-{
-    
+public class ObjectDistruction : MonoBehaviour {
+
     [SerializeField] private GameObject destroyVFX;
     [SerializeField] private string VFXSortingLayer = "Default";
     [SerializeField] private int VFXSortingLayerOrder = 0;
@@ -14,10 +13,25 @@ public class ObjectDistruction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.GetComponent<DamageSource>()) {
-            destructionVFX = Instantiate(destroyVFX, transform.position, Quaternion.identity);
-            SetSortingLayer(destructionVFX);
-            Destroy(gameObject);
+            HandleDestruction();
         }
+
+        if (collision.gameObject.GetComponent<EnemyAI>()) {
+            EnemyKnockBack enemyKnockBack = collision.gameObject.GetComponent<EnemyKnockBack>();
+            if (enemyKnockBack.IsKnockedBack()) {
+                HandleDestruction();
+            }
+        }
+    }
+
+    private void HandleDestruction() {
+        CreateDestructionVFX();
+        SetSortingLayer(destructionVFX);
+        Destroy(gameObject);
+    }
+
+    private void CreateDestructionVFX() {
+        destructionVFX = Instantiate(destroyVFX, transform.position, Quaternion.identity);
     }
 
     private void SetSortingLayer(GameObject obj) {
