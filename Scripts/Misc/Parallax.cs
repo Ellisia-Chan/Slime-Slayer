@@ -32,7 +32,6 @@ public class Parallax : MonoBehaviour {
 
     public void ResetCameraStartPos() {
         treeTop.transform.position = startPos - travelPos * parallaxOffset;
-        Debug.Log("Position Resetted");
     }
 
     private void MoveParallax() {

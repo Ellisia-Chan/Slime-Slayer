@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectActivartor : MonoBehaviour
+public class GameObjectActivator : MonoBehaviour
 {
 
     [SerializeField] private GameObject TransitionUI;
