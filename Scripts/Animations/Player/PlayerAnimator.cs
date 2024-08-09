@@ -40,4 +40,9 @@ public class PlayerAnimator : MonoBehaviour {
             spriteRenderer.flipX = false;
         }
     }
+
+    public void ResetPlayerAnimator() {
+        playerAnimator.SetFloat(MOVE_X, 0);
+        playerAnimator.SetFloat(MOVE_Y, 0);
+    }
 }
