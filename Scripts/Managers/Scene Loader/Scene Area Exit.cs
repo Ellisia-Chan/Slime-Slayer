@@ -10,12 +10,20 @@ public class SceneAreaExit : MonoBehaviour {
     [SerializeField] private Transform targetAreaEntrance;
     [SerializeField] private Collider2D targetAreaCamConfiner;
 
-    private void OnEnable() {
+    private void Start() {
         AreaTransitionUI.Instance.OnAreaChange += AreaTransitionUI_OnAreaChange;
     }
 
+    private void OnEnable() {
+        if (AreaTransitionUI.Instance != null) {
+            AreaTransitionUI.Instance.OnAreaChange += AreaTransitionUI_OnAreaChange;
+        }
+    }
+
     private void OnDisable() {
-        AreaTransitionUI.Instance.OnAreaChange -= AreaTransitionUI_OnAreaChange;
+        if (AreaTransitionUI.Instance != null) {
+            AreaTransitionUI.Instance.OnAreaChange -= AreaTransitionUI_OnAreaChange;
+        }
     }
 
     private void AreaTransitionUI_OnAreaChange(object sender, System.EventArgs e) {

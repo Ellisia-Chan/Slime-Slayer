@@ -26,6 +26,8 @@ public class AreaTransitionUI : MonoBehaviour {
     public void StartTransition() {
         if (IsTeleportToAreaRoutine) {
             StopCoroutine(StartTransitionRoutine());
+            IsTeleportToAreaRoutine = false;
+
         }
         StartCoroutine(StartTransitionRoutine());
     }
