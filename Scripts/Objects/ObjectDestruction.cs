@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectDistruction : MonoBehaviour {
+public class ObjectDestruction : MonoBehaviour {
 
     [SerializeField] private GameObject destroyVFX;
     [SerializeField] private string VFXSortingLayer = "Default";
@@ -16,12 +16,11 @@ public class ObjectDistruction : MonoBehaviour {
             HandleDestruction();
         }
 
-        if (collision.gameObject.GetComponent<EnemyAI>()) {
-            EnemyKnockBack enemyKnockBack = collision.gameObject.GetComponent<EnemyKnockBack>();
-            if (enemyKnockBack.IsKnockedBack()) {
-                HandleDestruction();
-            }
-        }
+        CheckEnemyKnockback(collision);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision) {
+        CheckEnemyKnockback(collision);
     }
 
     private void HandleDestruction() {
@@ -32,6 +31,15 @@ public class ObjectDistruction : MonoBehaviour {
 
     private void CreateDestructionVFX() {
         destructionVFX = Instantiate(destroyVFX, transform.position, Quaternion.identity);
+    }
+
+    private void CheckEnemyKnockback(Collider2D collision) {
+        if (collision.gameObject.GetComponent<EnemyAI>()) {
+            EnemyKnockBack enemyKnockBack = collision.gameObject.GetComponent<EnemyKnockBack>();
+            if (enemyKnockBack.IsKnockedBack()) {
+                HandleDestruction();
+            }
+        }
     }
 
     private void SetSortingLayer(GameObject obj) {
