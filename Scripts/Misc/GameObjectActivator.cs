@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectActivator : MonoBehaviour
-{
+public class GameObjectActivator : MonoBehaviour {
 
-    [SerializeField] private GameObject TransitionUI;
+    [SerializeField] private List<GameObject> gameObjectsList = new List<GameObject>();
 
     private void Awake() {
-        TransitionUI.SetActive(true);
+        foreach (GameObject item in gameObjectsList) {
+            item.SetActive(true);
+        }
     }
 }
